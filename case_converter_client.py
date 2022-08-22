@@ -16,9 +16,9 @@ if conn_type == 0:
         msg = '1;' + txt if to else '0;' + txt
 
         enc_msg = msg.encode()
-        client.sendto(enc_msg, (server, port)) 
+        client.send(enc_msg) 
 
-        mod_msg, serverIP = client.recvfrom(1500)         
+        mod_msg = client.recv(1500)         
         dec_msg = mod_msg.decode()
 
         print('-'*5+f'\n{dec_msg}\n'+'-'*5)   # print received/decoded message

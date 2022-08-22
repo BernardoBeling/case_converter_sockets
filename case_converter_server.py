@@ -1,8 +1,9 @@
 from base64 import decode
 from socket import *
 
-host = 'localhost'  
+host = input('Host IP (default localhost): ') or 'localhost'
 port = 9999	
+
 
 conn_type = int(input('Connection type:\n0 - TCP (default)\n1 - UDP\n-> ') or 0) #0: TCP, 1: UDP
 
@@ -10,7 +11,7 @@ if conn_type == 0:
    with socket(AF_INET,SOCK_STREAM)	as server: # creates an tcp socket (server side)    
         server.bind((host,port))
         server.listen()
-        print(f'Server is listening on port {port} with TCP connection!')
+        print(f'Server is listening on {host}:{port} with TCP connection!')
         conn, addr = server.accept()
         
         with conn:
