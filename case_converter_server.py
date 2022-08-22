@@ -12,11 +12,11 @@ if conn_type == 0:
         server.bind((host,port))
         server.listen()
         print(f'Server is listening on {host}:{port} with TCP connection!')
-        conn, addr = server.accept()
         
-        with conn:
-            print(f'Connection succesfull with client {addr}')
-            while 1:
+        while 1:
+            conn, addr = server.accept()
+            with conn:
+                print(f'Connection succesfull with client {addr}')
                 msg = conn.recv(1500)
                 if not msg:
                     break
