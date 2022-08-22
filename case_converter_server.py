@@ -33,15 +33,18 @@ if conn_type == 0:
 else:
     server = socket(AF_INET,SOCK_DGRAM)	# creates an udp socket (server side)
     server.bind((host, port))	# bind() associates the socket with its local address [bind() is used in the server side]
-    print(f'Server is listening on port {port} with UDP connection!')
+    print(f'Server is listening on {host}:{port} with UDP connection!')
 
     while 1:
         message, clientIP = server.recvfrom(1500)		# 1500 bytes are read from the UDP socket
-        decodedMessage = message.decode()
-        print(f'Received message: {message}, Decoded messsage: {decodedMessage}')
+        print(f'Received from: {clientIP}')
+        dec_msg = message.decode()
+        print(f'Received message: {message}, Decoded messsage: {dec_msg}')
 
-        modifiedMessage = decodedMessage.upper()
-        encodedMessage = modifiedMessage.encode()
-        print(f'Modified message: {modifiedMessage}, Encoded messsage: {encodedMessage}')
+        to, txt = dec_msg.split(';')
+        new_txt = txt.upper() if int(to) else txt.lower() #0: to lower  1: to upper
+        enc_msg = new_txt.encode()
 
-        server.sendto(encodedMessage, clientIP)		# sends converted (upper-case) sentence
+        print(f'Modified message: {new_txt}, Encoded messsage: {enc_msg}')
+
+        server.sendto(enc_msg, clientIP)		# sends converted (upper-case) sentence
