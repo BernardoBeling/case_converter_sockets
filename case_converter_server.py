@@ -8,11 +8,11 @@ port = 9999
 conn_type = int(input('Connection type:\n0 - TCP (default)\n1 - UDP\n-> ') or 0) #0: TCP, 1: UDP
 
 if conn_type == 0:
-    server = socket(AF_INET,SOCK_STREAM)	as server: # creates an tcp socket (server side)    
+    server = socket(AF_INET,SOCK_STREAM) # creates an tcp socket (server side)    
     server.bind((host,port))
     server.listen()
     print(f'Server is listening on {host}:{port} with TCP connection!')
-
+        
     while 1:
         conn, addr = server.accept()
         with conn:
