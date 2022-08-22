@@ -1,6 +1,6 @@
 from socket import *
 
-server = 'localhost'  
+server = input('Server ip (default localhost): ') or 'localhost'  
 port = 9999
 keep = 1
 
